@@ -4,19 +4,28 @@ import PropTypes from 'prop-types';
 //стили
 import styles from './Input.module.css';
 
-const Input = ({ inputLabel, type, value, onInputChange }) => {
+const Input = ({
+  inputLabel,
+  type,
+  value,
+  onInputChange,
+  pattern,
+  title,
+  name,
+}) => {
   return (
     <label htmlFor="" className={styles.InputLabel}>
       {inputLabel}
       <input
         className={styles.Input}
         type={type}
-        name="name"
+        name={name}
         value={value}
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+        pattern={pattern}
+        title={title}
         required
         onChange={onInputChange}
+        autoComplete="off"
       />
     </label>
   );
@@ -24,6 +33,10 @@ const Input = ({ inputLabel, type, value, onInputChange }) => {
 
 Input.propTypes = {
   inputLabel: PropTypes.string,
+  name: PropTypes.string,
+  type: PropTypes.string,
+  pattern: PropTypes.string,
+  title: PropTypes.string,
   value: PropTypes.string,
   onInputChange: PropTypes.func,
 };

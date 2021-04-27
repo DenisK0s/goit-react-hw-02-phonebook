@@ -4,14 +4,21 @@ import PropTypes from 'prop-types';
 //стили
 import styles from './Contacts.module.css';
 
-const Contacts = ({ contactsItems }) => {
-  console.log(contactsItems);
+const Contacts = ({ contactsItems, onDeleteContact }) => {
   return (
     <div className={styles.Contacts}>
-      <h2 className="Title">Contacts</h2>
-      <ul className="ContactsList">
-        {contactsItems.map(({ name, id }) => {
-          return <li key={id}>{name}</li>;
+      <ul className={styles.ContactsList}>
+        {contactsItems.map(({ name, id, number }) => {
+          return (
+            <li key={id} className={styles.ContactsListItem}>
+              <span className={styles.ContactValue}>
+                {name}: {number}
+              </span>
+              <button type="button" onClick={() => onDeleteContact(id)}>
+                delete
+              </button>
+            </li>
+          );
         })}
       </ul>
     </div>
@@ -20,6 +27,7 @@ const Contacts = ({ contactsItems }) => {
 
 Contacts.propTypes = {
   contactsItems: PropTypes.array,
+  onDeleteContact: PropTypes.func,
 };
 
 export default Contacts;
